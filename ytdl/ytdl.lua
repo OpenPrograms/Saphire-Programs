@@ -9,8 +9,8 @@
  local term = require("term")
  local tape
 
- if opts["a"] then
-     tape = c.proxy(c.get(opts["a"]))
+ if opts["A"] then
+     tape = c.proxy(c.get(opts["A"]))
      print("Using tape drive ["..tape.address.."]")
  else
      print("Using tape drive ["..tape.address.."]")
@@ -50,8 +50,9 @@
  end
 
  if not args[1] then
-     print("Usage: ytdl - [options: dtsca] [list of youtube video IDs or URLs].")
+     print("Usage: ytdl - [options: dAtsca] [list of youtube video IDs or URLs].")
      print("Options: d - Use double (64K or 96K) bitrate.")
+     print("         A - Set address of tape to be used.")
      print("         b - Set bitrate. Negates effects of `d`.")
      print("         t - DISABLES automatic titling of tapes. Sets title if it's a string.")
      print("         s - Skip download of video. Mostly for titling untitled tapes.")
@@ -110,6 +111,7 @@
      end
 
      if opts["t"] and type(opts["t"]) == "string" and not opts["c"] then
+         print("Using option -t value as tape label!")
          tape.setLabel(opts["t"])
      elseif not opts["t"] and not opts["c"] then
          print("Using youtube title as tape label!")
@@ -126,7 +128,7 @@
  end
 
  if not opts["t"] and opts["c"] then
-     print("Using _last_ youtube title as tape label!")
+     print("Using last youtube title as tape label.")
      local h = internet.request("http://dfpwm.magik6k.net/title/"..getId(args[#args]))
      local d = ""
      for a in h do
@@ -134,7 +136,9 @@
      end
      local web_title = string.gsub(d,"\n","")
      tape.setLabel(web_title.." ["..tostring(bitrate).."K]")
- elseif opts["t"] and opts["t"] then
+ elseif opts["t"] and type(opts["t"]) == "string" and opts["c"] then
+    print("Using option -t value as tape label!")
+    tape.setLabel(opts["t"])
  end
 
  tape.setSpeed(bitrate/base_bitrate)
