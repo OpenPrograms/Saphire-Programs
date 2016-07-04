@@ -13,6 +13,7 @@
      tape = c.proxy(c.get(opts["A"]))
      print("Using tape drive ["..tape.address.."]")
  else
+     tape = c.tape_drive
      print("Using tape drive ["..tape.address.."]")
      i = 0
      for k in c.list("tape_drive") do
@@ -22,7 +23,6 @@
          print("WARNING! More than one tape drive detected! Are you sure you want to continue? [y/N]")
          if string.lower(string.sub(io.read(), 1, 1))~="y" then print("Exiting!") return end
      end
-     tape = c.tape_drive
  end
 
  local b_size = 8 * 1024-- size of block/chunk that's written to tape
