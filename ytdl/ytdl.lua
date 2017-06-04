@@ -30,7 +30,7 @@
  local base_conv_url = "http://dfpwm.magik6k.net/conv"
 
  if opts["a"] then
-     local base_conv_url = "http://dfpwm.magik6k.net/aconv"
+     base_conv_url = "http://dfpwm.magik6k.net/aconv"
      b_size = 12 * 1024
      base_bitrate = 48
  end
@@ -142,7 +142,7 @@
  end
 
  tape.setSpeed(bitrate/base_bitrate)
- print("Using bitrate "..tostring(bitrate).."K, speed is set to "..tostring(bitrate/32))
+ print("Using bitrate "..tostring(bitrate).."K, speed is set to "..tostring(bitrate/base_bitrate))
 
  tape.seek(-tape.getSize())
  print("Tape rewound.")
