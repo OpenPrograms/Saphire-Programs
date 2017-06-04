@@ -35,7 +35,7 @@
      base_bitrate = 48
  end
 
- local bitrate = base_bistrate
+ local bitrate = base_bitrate
 
  if opts["b"] then
      if not tonumber(opts["b"]) then
