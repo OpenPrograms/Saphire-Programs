@@ -27,10 +27,10 @@
 
  local b_size = 8 * 1024-- size of block/chunk that's written to tape
  local base_bitrate = 32
- local base_conv_url = "http://dfpwm.magik6k.net/conv"
+ local base_conv_url = "http://dfpwm.catgirl.services/conv"
 
  if opts["a"] then
-     base_conv_url = "http://dfpwm.magik6k.net/aconv"
+     base_conv_url = "http://dfpwm.catgirl.services/aconv"
      b_size = 12 * 1024
      base_bitrate = 48
  end
@@ -115,7 +115,7 @@
          tape.setLabel(opts["t"])
      elseif not opts["t"] and not opts["c"] then
          print("Using youtube title as tape label!")
-         local h = internet.request("http://dfpwm.magik6k.net/title/" .. yt_id)
+         local h = internet.request("http://dfpwm.catgirl.services/title/" .. yt_id)
          local d = ""
          for a in h do
              d = d .. a
@@ -129,7 +129,7 @@
 
  if not opts["t"] and opts["c"] then
      print("Using last youtube title as tape label.")
-     local h = internet.request("http://dfpwm.magik6k.net/title/"..getId(args[#args]))
+     local h = internet.request("http://dfpwm.catgirl.services/title/"..getId(args[#args]))
      local d = ""
      for a in h do
          d = d..a
