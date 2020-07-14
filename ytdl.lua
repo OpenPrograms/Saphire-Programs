@@ -84,11 +84,11 @@ local getId = function(str)
 end
 
 local function printSize(bytes)
-    print(string.format("Total downloaded: % 10d bytes"), bytes)
+    print(string.format("Total downloaded: % 10d bytes", bytes))
 end
 
 local function downloadAudio(id, l_bitrate)
-    local b_size = bitrate * 
+    local b_size = bitrate * 256
     print("Downloading " .. id)
 
     local url = base_conv_url .. (tostring(l_bitrate) or "") .. "/" .. id
