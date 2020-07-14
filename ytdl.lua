@@ -30,6 +30,7 @@ else
     end
 end
 
+local isCont = opts["c"] or false
 local base_site = "http://dfpwm.catgirl.services"
 local base_bitrate = 48
 local base_conv_url = base_site .. "/aconv"
@@ -114,13 +115,13 @@ local function downloadAudio(id, l_bitrate)
 end
 
 local function setLabel(id, needCont)
-    local cont = cont or false
-    if opts["t"] and type(opts["t"]) == "string" and opts["c"] == cont then
+    local needCont = needCont or false
+    if opts["t"] and type(opts["t"]) == "string" and isCont == needCont then
         print("Using option -t value as tape label!")
         tape.setLabel(opts["t"])
-    elseif not opts["t"] and opts["c"] == cont then
+    elseif not opts["t"] and isCont == needCont then
         print("Using youtube title as tape label!")
-        local h = internet.request(base_site .. "/title/" .. yt_id)
+        local h = internet.request(base_site .. "/title/" .. id)
         local d = ""
         for a in h do
             d = d .. a
@@ -132,7 +133,7 @@ local function setLabel(id, needCont)
 end
 
 tape.stop()
-if not opts["c"] then
+if not isCont then
     tape.seek(-math.huge)
 end
 
@@ -154,7 +155,7 @@ setLabel(getId(args[#args]), true)
 tape.setSpeed(bitrate / base_bitrate)
 print("Using bitrate "..tostring(bitrate).."K, speed is set to "..tostring(bitrate / base_bitrate))
 
-if not opts["c"] then
+if not isCont then
     tape.seek(-math.huge)
     print("Tape rewound.")
 end
