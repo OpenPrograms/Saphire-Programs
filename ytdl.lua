@@ -149,7 +149,7 @@ for k,v in pairs(args) do
     print("------")
 end
 
-setLabel(yt_id, true)
+setLabel(getId(args[#args]), true)
 
 tape.setSpeed(bitrate / base_bitrate)
 print("Using bitrate "..tostring(bitrate).."K, speed is set to "..tostring(bitrate / base_bitrate))
